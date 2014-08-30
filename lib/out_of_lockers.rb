@@ -1,0 +1,2 @@
+class OutOfLockers < Exception
+end

@@ -1,0 +1,2 @@
+class BagExists < Exception
+end

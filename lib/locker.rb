@@ -1,14 +1,24 @@
 class Locker
-  LOCKER_SIZE_SMALL = 1
-  LOCKER_SIZE_MEDIUM = 2
-  LOCKER_SIZE_LARGE = 3
 
-  SIZES = [LOCKER_SIZE_SMALL, LOCKER_SIZE_MEDIUM, LOCKER_SIZE_LARGE]
   attr_reader :size
+  attr_reader :bag
 
   def initialize(size)
-    raise RangeError unless SIZES.include? size
+    raise RangeError unless Sizes::ALL.include? size
     @size = size
+    @bag = nil
+  end
+
+  def accept_bag(bag)
+    raise RangeError, "bag is too big" if bag.size > self.size
+    raise BagExists if @bag
+    @bag = bag
+  end
+
+  def return_bag
+    bag = @bag
+    @bag = nil
+    bag
   end
 
 end
